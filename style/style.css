@@ -1,0 +1,119 @@
+:root {
+    --padding-m: 1em;
+    --padding-s: 0.5em;
+    --padding-xs: 4px;
+    --font-size-s: 8px;
+    --font-size-sm: 12px;
+    --font-size-m: 16px;
+    --font-size-l: 32px;
+    --font-size-xl: 48px;
+    --main-color: #9966CC;
+    --success-color: #2cff05;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(90deg, var(--main-color), #333);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Baumans", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.main-content h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-m);
+    font-size: var(--font-size-l);
+    color: #f1f2f3;
+}
+
+.main-content form {
+    background-color: var(--main-color);
+    padding: var(--padding-m);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 4px;
+    gap: 2px;
+    width: 500px;
+}
+
+.main-content form .form-control {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 16px 1fr 12px;
+    row-gap: 8px;
+    color: #f1f2f3;
+    align-items: center;
+}
+
+.form-control input,
+.form-control select {
+    grid-column: 1 / -1;
+    height: 32px;
+    border-radius: 8px;
+    font-size: var(--font-size-m);
+    padding: var(--padding-xs);
+    color: var(--main-color);
+    font-family: "Baumans", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border: none;
+}
+
+.form-control .error-message {
+    grid-row: 3 / 3;
+    grid-column: 1 / -1;
+    color: yellow;
+    font-size: var(--font-size-sm);
+}
+
+form .btn-control {
+    display: flex;
+    justify-content: center;
+    padding: var(--font-size-s);
+}
+
+.btn-control button {
+    cursor: pointer;
+    padding: var(--font-size-s);
+    width: 100%;
+    font-size: var(--font-size-m);
+    font-family: "Baumans", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-radius: var(--padding-s);
+}
+
+button:hover {
+    background-color: var(--main-color);
+    color: #F1F2F3;
+    border: 2px solid#F1F2F3;
+}
+
+.error-message.hidden {
+    display: none;
+}
+
+input:focus,
+select:focus {
+    border: #333;
+}
+
+input:invalid,
+select:invalid {
+    outline: 2px solid red;
+}
+
+input:valid,
+select:valid {
+    border: 2px solid var(--success-color);
+}

@@ -92,6 +92,7 @@ function setUpEventListeners() {
 
 function checkEmailInput(input) {
     const errorMsgElement = input.closest(parentElement.INPUT_WRAPPER).querySelector(errorMessage.CLASS);
+    errorMsgElement.classList.remove('hidden');
     if (input.validity.valueMissing) {
         errorMsgElement.textContent = "Please enter your email.";
     } else if (input.validity.typeMismatch) {
@@ -100,6 +101,7 @@ function checkEmailInput(input) {
         errorMsgElement.textContent = 'Please enter a valid Luminary account. eg: (example@luminae.lum).'
     } else {
         errorMsgElement.textContent = '';
+        errorMsgElement.classList.add('hidden');
     }
 }
 
