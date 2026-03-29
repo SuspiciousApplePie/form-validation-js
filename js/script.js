@@ -26,3 +26,44 @@ const cities = [
     }
 ];
 
+const inputWrapper = {
+    CLASS: '.form-control',
+}
+
+const errorMessage = {
+    CLASS: '.error-message',
+}
+
+const inputEmailElement = {
+    ID: 'email-address',
+}
+
+function init() {
+    setUpEventListeners();
+}
+
+function setUpEventListeners() {
+    const main = document.querySelector(".container");
+    main.addEventListener("input", (e) => {
+        if(e.target.id === inputEmailElement.ID) {
+            checkNameInput(e.target);
+        }
+    });
+    main.addEventListener("change", (e) => {
+        console.log(e);
+    })
+}
+
+function checkNameInput(input) {
+    const errorMsgElement = input.closest(inputWrapper.CLASS).querySelector(errorMessage.CLASS);
+    if (input.validity.valueMissing) {
+        errorMsgElement.textContent = "Please enter your email.";
+    } else if (input.validity.patternMismatch) {
+        errorMsgElement.textContent = 'Please enter a valid Luminary account. eg: (example@luminae.lum).'
+    } else {
+        errorMsgElement.textContent = '';
+    }
+}
+
+init();
+

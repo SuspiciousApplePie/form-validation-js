@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/script.js" defer></script>
     <title>Sign up</title>
 </head>
 <body>
@@ -13,11 +14,13 @@
                 <form action="" method="post" novalidate>
                     <div class="form-control">
                         <label for="email-address">Email</label>
-                        <input type="email" name="email-address" id="email-address">
+                        <input type="email" name="email-address" id="email-address" pattern="^.+@luminae\.lum$" required>
+                        <p class="error-message"></p>
                     </div>
                     <div class="form-control">
-                        <label for="countries">Country</label>
-                        <select name="" id="countries">
+                        <label for="cities">Country</label>
+                        <select name="" id="cities">
+                            <option value="" selected>---Select a City---</option>
                             <option value="il">Illumia</option>
                             <option value="lu">Lunatown</option>
                             <option value="st">Starspire</option>
