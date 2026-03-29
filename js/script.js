@@ -38,6 +38,7 @@ const inputElement = {
     EMAIL: 'email-address',
     POSTAL: '#postal',
     CITY: 'cities',
+    PASSWORD: 'password',
 }
 
 function init() {
@@ -51,6 +52,8 @@ function setUpEventListeners() {
             checkEmailInput(e.target);
         } else if (e.target.id === inputElement.POSTAL.replace('#', '')) {
             checkPostalInput(e.target);
+        } else if (e.target.id === inputElement.PASSWORD.replace('#', '')) {
+            checkPasswordInput(e.target);
         }
     });
     main.addEventListener("change", (e) => {
@@ -98,6 +101,17 @@ function checkPostalInput(postal) {
         errorMsgElement.textContent = 'Please enter your postal code.';
     } else if (postal.validity.patternMismatch) {
         errorMsgElement.textContent = `Wrong format, the proper format is: ${postal.placeholder}`;
+    } else {
+        errorMsgElement.textContent = '';
+    }
+}
+
+function checkPasswordInput(password) {
+    const errorMsgElement = password.closest(parentElement.INPUT_WRAPPER).querySelector(errorMessage.CLASS);
+    if (password.validity.valueMissing) {
+        errorMsgElement.textContent = 'Please enter your password.';
+    } else if (password.validity.tooShort) {
+        errorMsgElement.textContent = `Your password is too short, password should be at least ${password.minLength} characters`;
     } else {
         errorMsgElement.textContent = '';
     }
