@@ -84,6 +84,10 @@ function changeRegexPattern(input) {
             postalInputElement.placeholder = city.SAMPLE;
         }
     })
+
+    if (postalInputElement.value) {
+        checkPostalInput(postalInputElement);
+    }
 }
 
 function checkCitySelected(select) {
@@ -99,6 +103,8 @@ function checkPostalInput(postal) {
     const errorMsgElement = postal.closest(parentElement.INPUT_WRAPPER).querySelector(errorMessage.CLASS);
     if (postal.validity.valueMissing) {
         errorMsgElement.textContent = 'Please enter your postal code.';
+    } else if (!postal.pattern.length) {
+        errorMsgElement.textContent = `Select a city first.`;
     } else if (postal.validity.patternMismatch) {
         errorMsgElement.textContent = `Wrong format, the proper format is: ${postal.placeholder}`;
     } else {
