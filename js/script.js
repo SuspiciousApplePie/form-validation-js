@@ -38,7 +38,8 @@ const inputElement = {
     EMAIL: 'email-address',
     POSTAL: '#postal',
     CITY: 'cities',
-    PASSWORD: 'password',
+    PASSWORD: '#password',
+    CONFIRM_PASSWORD: '#confirm-password',
 }
 
 function init() {
@@ -54,6 +55,8 @@ function setUpEventListeners() {
             checkPostalInput(e.target);
         } else if (e.target.id === inputElement.PASSWORD.replace('#', '')) {
             checkPasswordInput(e.target);
+        } else if (e.target.id === inputElement.CONFIRM_PASSWORD.replace('#', '')) {
+            comparePassword(e.target);
         }
     });
     main.addEventListener("change", (e) => {
@@ -118,6 +121,21 @@ function checkPasswordInput(password) {
         errorMsgElement.textContent = 'Please enter your password.';
     } else if (password.validity.tooShort) {
         errorMsgElement.textContent = `Your password is too short, password should be at least ${password.minLength} characters`;
+    } else {
+        errorMsgElement.textContent = '';
+    }
+}
+
+function comparePassword(confirmPassword) {
+    const password = confirmPassword.closest('form').querySelector(inputElement.PASSWORD);
+    const errorMsgElement = confirmPassword.closest(parentElement.INPUT_WRAPPER).querySelector(errorMessage.CLASS);
+    if (confirmPassword.validity.valueMissing) {
+        errorMsgElement.textContent = 'Please confirm your password';
+    } else if (confirmPassword.validity.tooShort) {
+        errorMsgElement.textContent = `Your password is too short, password should be at least ${confirmPassword.minLength} characters`;
+    } else if (confirmPassword.value !== password.value) {
+        confirmPassword.valid = false;
+        errorMsgElement.textContent = 'The password does not match';
     } else {
         errorMsgElement.textContent = '';
     }
