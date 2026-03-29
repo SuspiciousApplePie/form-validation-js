@@ -65,12 +65,37 @@ function setUpEventListeners() {
             checkCitySelected(e.target);
         }
     })
+
+    main.addEventListener("submit", (e) => {
+        const form = e.target;
+        const email = form.querySelector(`#${inputElement.EMAIL}`);
+        const city = form.querySelector(`#${inputElement.CITY}`);
+        const postal = form.querySelector(inputElement.POSTAL);
+        const password = form.querySelector(inputElement.PASSWORD);
+        const confirmPassword = form.querySelector(inputElement.CONFIRM_PASSWORD);
+        if (!email.validity.valid) {
+            checkEmailInput(email);
+        } else if (!city.validity.valid) {
+            checkCitySelected(city);
+        } else if (!postal.validity.valid) {
+            checkPostalInput(postal);
+        } else if (!password.validity.valid) {
+            checkPasswordInput(password);
+        } else if (!confirmPassword.validity.valid) {
+            comparePassword(confirmPassword);
+        } else {
+            alert('You are a Luminary.')
+        }
+        e.preventDefault();
+    })
 }
 
 function checkEmailInput(input) {
     const errorMsgElement = input.closest(parentElement.INPUT_WRAPPER).querySelector(errorMessage.CLASS);
     if (input.validity.valueMissing) {
         errorMsgElement.textContent = "Please enter your email.";
+    } else if (input.validity.typeMismatch) {
+        errorMsgElement.textContent = 'Please enter an email.';
     } else if (input.validity.patternMismatch) {
         errorMsgElement.textContent = 'Please enter a valid Luminary account. eg: (example@luminae.lum).'
     } else {
@@ -134,9 +159,10 @@ function comparePassword(confirmPassword) {
     } else if (confirmPassword.validity.tooShort) {
         errorMsgElement.textContent = `Your password is too short, password should be at least ${confirmPassword.minLength} characters`;
     } else if (confirmPassword.value !== password.value) {
-        confirmPassword.valid = false;
+        confirmPassword.setCustomValidity('The password does not match');
         errorMsgElement.textContent = 'The password does not match';
     } else {
+        confirmPassword.setCustomValidity('');
         errorMsgElement.textContent = '';
     }
 }
